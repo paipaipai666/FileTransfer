@@ -443,7 +443,23 @@ release/FileTransfer.o: ../src/FileTransfer.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QFileDialog \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qfiledialog.h \
-		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qdialog.h
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/QFuture \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qfuture.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qfutureinterface.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qrunnable.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qexception.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qresultstore.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/QtConcurrentRun \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/qtconcurrentrun.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/qtconcurrentcompilertest.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/qtconcurrent_global.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/qtconcurrentrunbase.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qthreadpool.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qthread.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qelapsedtimer.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtConcurrent/qtconcurrentstoredfunctioncall.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\FileTransfer.o ..\src\FileTransfer.cpp
 
 release/main.o: ../src/main.cpp ../src/FileTransfer.h \

@@ -29,7 +29,7 @@ int ServerHelper::SendFile(QString port,QString fileName){
         return ErrorHandling("WSAStartup() error");
 
     fp=fopen(SendfileName.c_str(),"rb");
-    fileSize=(long long)getFileSize(fp);
+    //fileSize=(long long)getFileSize(fp);
     hServSock=socket(PF_INET,SOCK_STREAM,0);
 
     memset(&servAdr,0,sizeof(servAdr));
@@ -48,7 +48,7 @@ int ServerHelper::SendFile(QString port,QString fileName){
             send(hClntSock,(char*)&buf,readCnt,0);
             break;
         }
-        send(hClntSock,(char*)&buf,BUF_SIZE,0);
+        send(hClntSock,(char*)&buf,readCnt,0);
     }
     fclose(fp);
     closesocket(hClntSock);
