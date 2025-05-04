@@ -12,11 +12,89 @@ FileTransfer::FileTransfer(QWidget* parent)
     , ui(new Ui_FileTransfer)
 {
     ui->setupUi(this);
+    
+    // 初始化页面切换动画
+    m_tabAnimation = new QPropertyAnimation(ui->tabWidget, "pos");
+    m_tabAnimation->setDuration(300);
+    m_tabAnimation->setEasingCurve(QEasingCurve::OutBack);
+    
+    // 连接tab切换信号
+    connect(ui->tabWidget, &QTabWidget::currentChanged, [this](int index) {
+        QPoint startPos = ui->tabWidget->pos();
+        QPoint endPos = startPos;
+        
+        if (index == 0) { // 切换到服务器页
+            startPos.setX(startPos.x() - 20);
+        } else { // 切换到客户端页
+            startPos.setX(startPos.x() + 20);
+        }
+        
+        m_tabAnimation->setStartValue(startPos);
+        m_tabAnimation->setEndValue(endPos);
+        m_tabAnimation->start();
+    });
+    
+    setupButtonAnimations();
 }
 
 FileTransfer::~FileTransfer()
 {
     delete ui; 
+}
+
+void FileTransfer::showStatusMessage(const QString& message, bool isError)
+{
+    QLabel* statusLabel = ui->tabWidget->currentIndex() == 0 
+        ? ui->label_2 
+        : ui->label_8;
+    
+    statusLabel->setText("状态: " + message);
+    
+    // 创建颜色动画
+    QPropertyAnimation* colorAnim = new QPropertyAnimation(statusLabel, "color");
+    colorAnim->setDuration(1000);
+    colorAnim->setStartValue(isError ? QColor(255, 0, 0) : QColor(0, 180, 0));
+    colorAnim->setEndValue(QColor(0, 0, 0));
+    colorAnim->start(QAbstractAnimation::DeleteWhenStopped);
+    
+    // 创建缩放动画
+    QPropertyAnimation* scaleAnim = new QPropertyAnimation(statusLabel, "geometry");
+    scaleAnim->setDuration(300);
+    QRect startRect = statusLabel->geometry();
+    QRect endRect = startRect;
+    startRect.setWidth(startRect.width() * 1.1);
+    scaleAnim->setStartValue(startRect);
+    scaleAnim->setEndValue(endRect);
+    scaleAnim->setEasingCurve(QEasingCurve::OutBack);
+    scaleAnim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void FileTransfer::setupButtonAnimations()
+{
+    // 为所有按钮添加基本样式
+    QString buttonStyle = R"(
+        QPushButton {
+            background-color: #4a6baf;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        QPushButton:hover {
+            background-color: #3a5a9f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        QPushButton:pressed {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+    )";
+    
+    ui->pushButton->setStyleSheet(buttonStyle);
+    ui->pushButton_2->setStyleSheet(buttonStyle);
+    ui->toolButton->setStyleSheet(buttonStyle);
 }
 void FileTransfer::on_toolButton_clicked()
 {
