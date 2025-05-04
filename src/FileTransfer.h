@@ -9,6 +9,9 @@ public:
     FileTransfer(QWidget* parent = nullptr);
     ~FileTransfer();
 
+private slots:
+    void on_toolButton_clicked();
+
 private:
     Ui_FileTransfer* ui;
 };
