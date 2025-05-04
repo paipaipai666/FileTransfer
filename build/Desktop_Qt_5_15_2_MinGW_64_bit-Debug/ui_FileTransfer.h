@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -33,11 +32,11 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
-    QSpinBox *spinBox;
+    QSpinBox *portBox;
     QPushButton *pushButton;
     QToolButton *toolButton;
-    QComboBox *comboBox;
     QLabel *label_9;
+    QLineEdit *fileNameEdit;
     QWidget *ClientPage;
     QLabel *label_5;
     QLabel *label_6;
@@ -70,21 +69,21 @@ public:
         label_3 = new QLabel(ServerPage);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(20, 90, 41, 20));
-        spinBox = new QSpinBox(ServerPage);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setGeometry(QRect(70, 90, 71, 22));
+        portBox = new QSpinBox(ServerPage);
+        portBox->setObjectName(QString::fromUtf8("portBox"));
+        portBox->setGeometry(QRect(70, 90, 71, 22));
         pushButton = new QPushButton(ServerPage);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(20, 120, 281, 31));
         toolButton = new QToolButton(ServerPage);
         toolButton->setObjectName(QString::fromUtf8("toolButton"));
         toolButton->setGeometry(QRect(230, 220, 51, 21));
-        comboBox = new QComboBox(ServerPage);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(20, 220, 191, 22));
         label_9 = new QLabel(ServerPage);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setGeometry(QRect(30, 180, 61, 21));
+        fileNameEdit = new QLineEdit(ServerPage);
+        fileNameEdit->setObjectName(QString::fromUtf8("fileNameEdit"));
+        fileNameEdit->setGeometry(QRect(30, 220, 191, 20));
         tabWidget->addTab(ServerPage, QString());
         ClientPage = new QWidget();
         ClientPage->setObjectName(QString::fromUtf8("ClientPage"));

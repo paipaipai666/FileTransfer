@@ -1,4 +1,6 @@
 #include "FileTransfer.h"
+#include "utl/ServerHelper.h"
+#include "utl/ServerHelper.h"
 #include "QDir"
 #include "QFileDialog"
 
@@ -15,16 +17,17 @@ FileTransfer::~FileTransfer()
 }
 void FileTransfer::on_toolButton_clicked()
 {
-    ui->comboBox->clear();
-    QString path = QDir::toNativeSeparators(QFileDialog::getExistingDirectory(this,tr("view file"),QDir::currentPath()));
-    QDir dir(path);
+    QString fileName = QFileDialog::getOpenFileName(this,tr("open a file"),"../",tr("all file(*.*)"));
+    ui->fileNameEdit->setText(fileName);
+}
 
-    dir.setFilter(QDir::Files | QDir::NoDotAndDotDot | QDir::Dirs);
-    QFileInfoList list = dir.entryInfoList();
 
-    for(int i = 0;i<list.length();i++){
-        QString file = list.at(i).fileName();
-        ui->comboBox->addItem(file);
-    }
+void FileTransfer::on_pushButton_clicked()
+{
+    QString fileName = ui->fileNameEdit->text();
+    QString port = QString::number(ui->portBox->value());
+    ServerHelper* sh = new ServerHelper();
+
+    sh->SendFile(port,fileName);
 }
 

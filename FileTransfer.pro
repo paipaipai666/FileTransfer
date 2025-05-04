@@ -2,14 +2,18 @@ QT += core gui widgets
 
 CONFIG += c++17
 
+LIBS += -lws2_32
+
 win32-msvc*:QMAKE_CXXFLAGS += /utf-8
 # QMAKE_LFLAGS += "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\""
 
 SOURCES += \
-    $$files($$PWD/src/*.cpp)
+    $$files($$PWD/src/*.cpp) \
+    $$files($$PWD/utl/*.cpp)
 
 HEADERS += \
-    $$files($$PWD/src/*.h)
+    $$files($$PWD/src/*.h) \
+    $$files($$PWD/utl/*.h)
 
 FORMS += $$PWD/src/FileTransfer.ui
 

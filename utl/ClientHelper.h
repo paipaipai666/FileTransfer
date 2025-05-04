@@ -8,6 +8,5 @@ extern "C"{
 class ClientHelper : public TransHelper{
 public:
     ClientHelper();
-private:
     int RecvFile(QString IP,QString port,QString fileName);
 };

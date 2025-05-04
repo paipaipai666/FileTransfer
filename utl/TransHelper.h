@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "lws2_32.lib")
 #include <QString>
 extern "C"{
     #include <winsock2.h> 
@@ -8,8 +9,8 @@ class TransHelper{
 public:
     int BUF_SIZE = 30;
 public:
-    size_t getFileSize(FILE * fp);
-    int ErrorHandling(const char* message);
+    inline size_t getFileSize(FILE * fp);
+    inline int ErrorHandling(const char* message);
 };
 
 size_t TransHelper::getFileSize(FILE * fp){

@@ -9,6 +9,5 @@ class ServerHelper : public TransHelper{
 public:
     ServerHelper();
     //~ServerHelper();
-private:
     int SendFile(QString port,QString fileName);
 };
