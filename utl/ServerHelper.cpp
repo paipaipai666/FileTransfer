@@ -1,105 +1,67 @@
 #include "ServerHelper.h"
-#include <cstring>
-#include <QObject>
-#include <QThread>
+#include <QDataStream>
+#include <QTcpServer>
+#include <QHostAddress>
+#include <QTcpSocket>
 #include <QFileInfo>
-#include <QDir>
-#include <QDebug>
-extern "C"{
-#include <winsock2.h> 
-#include <cstdio>
-}
-#pragma comment(lib, "lws2_32.lib")
 
 ServerHelper::ServerHelper() {};
 
 int ServerHelper::SendFile(QString port, QString fileName) {
-    std::string SendPort = port.toStdString();
-    // 将相对路径转换为绝对路径
-    QFileInfo fileInfo(fileName);
-    QString absolutePath = fileInfo.absoluteFilePath();
-    
-    // 检查文件是否存在
-    if (!QFile::exists(absolutePath)) {
-        qDebug() << "File not found:" << absolutePath;
-        emit transferFinished(false);
-        return ErrorHandling("File not found");
-    }
-
-    WSADATA wsaData;
-    SOCKET hServSock, hClntSock;
-    FILE *fp;
-    long long totalSent = 0;
-    int value;
-    char buf[BUF_SIZE];
-    int readCnt;
-
-    SOCKADDR_IN servAdr, clntAdr;
-    int clntAdrSz;
-
-    if(WSAStartup(MAKEWORD(2,2), &wsaData) != 0)
-        return ErrorHandling("WSAStartup() error");
-
+    // 检查文件
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "File open error:" << file.errorString();
         emit transferFinished(false);
-        return ErrorHandling("File open error");
+        return ErrorHandling("无法打开文件");
     }
 
-    // 发送文件大小
-    qint64 fileSize = file.size();
-    send(hClntSock, (char*)&fileSize, sizeof(fileSize), 0);
-
-    hServSock = socket(PF_INET, SOCK_STREAM, 0);
-    if(hServSock == INVALID_SOCKET) {
+    // 创建服务器
+    QTcpServer server;
+    if (!server.listen(QHostAddress::Any, port.toUShort())) {
         file.close();
         emit transferFinished(false);
-        return ErrorHandling("Socket creation error");
+        return ErrorHandling("启动服务器失败");
     }
 
-    memset(&servAdr, 0, sizeof(servAdr));
-    servAdr.sin_family = AF_INET;
-    servAdr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servAdr.sin_port = htons(atoi(SendPort.c_str()));
-
-    if(bind(hServSock, (SOCKADDR*)&servAdr, sizeof(servAdr)) == SOCKET_ERROR) {
+    // 等待客户端连接
+    if (!server.waitForNewConnection(30000)) {
         file.close();
-        closesocket(hServSock);
         emit transferFinished(false);
-        return ErrorHandling("Bind error");
+        return ErrorHandling("等待客户端连接超时");
     }
 
-    listen(hServSock, 5);
+    QTcpSocket* clientSocket = server.nextPendingConnection();
+    
+    // 发送文件头(包含文件大小)
+    QDataStream out(clientSocket);
+    out.setVersion(QDataStream::Qt_5_15);
+    out << file.size();
 
-    clntAdrSz = sizeof(clntAdr);
-    hClntSock = accept(hServSock, (SOCKADDR*)&clntAdr, &clntAdrSz);
-    if(hClntSock == INVALID_SOCKET) {
-        file.close();
-        closesocket(hServSock);
-        emit transferFinished(false);
-        return ErrorHandling("Accept error");
-    }
-
-    while(!file.atEnd()) {
-        QByteArray buffer = file.read(BUF_SIZE);
-        int sent = send(hClntSock, buffer.constData(), buffer.size(), 0);
-        if (sent != buffer.size()) {
+    // 发送文件内容
+    qint64 bytesSent = 0;
+    while (!file.atEnd()) {
+        QByteArray buffer = file.read(4096);
+        qint64 bytesWritten = clientSocket->write(buffer);
+        if (bytesWritten == -1 || !clientSocket->waitForBytesWritten(5000)) {
             file.close();
+            clientSocket->close();
             emit transferFinished(false);
-            return ErrorHandling("Send error");
+            return ErrorHandling("发送数据失败");
         }
-
-        totalSent += sent;
+        bytesSent += bytesWritten;
         
-        // 计算并发送进度
-        int percent = static_cast<int>((totalSent * 100) / fileSize);
-        emit progressChanged(percent);
+        // 更新进度
+        int percent = static_cast<int>((bytesSent * 100) / file.size());
+        emit progressChanged(percent, bytesSent);
     }
 
     file.close();
-    closesocket(hClntSock);
-    closesocket(hServSock);
+    clientSocket->disconnectFromHost();
+    if (clientSocket->state() != QAbstractSocket::UnconnectedState) {
+        clientSocket->waitForDisconnected(1000);
+    }
+    delete clientSocket;
+    
     emit transferFinished(true);
     return 0;
 }

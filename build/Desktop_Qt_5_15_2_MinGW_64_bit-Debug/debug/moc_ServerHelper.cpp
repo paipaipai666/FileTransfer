@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ServerHelper_t {
-    QByteArrayData data[6];
-    char stringdata0[63];
+    QByteArrayData data[7];
+    char stringdata0[77];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,12 +36,13 @@ QT_MOC_LITERAL(0, 0, 12), // "ServerHelper"
 QT_MOC_LITERAL(1, 13, 15), // "progressChanged"
 QT_MOC_LITERAL(2, 29, 0), // ""
 QT_MOC_LITERAL(3, 30, 7), // "percent"
-QT_MOC_LITERAL(4, 38, 16), // "transferFinished"
-QT_MOC_LITERAL(5, 55, 7) // "success"
+QT_MOC_LITERAL(4, 38, 13), // "bytesReceived"
+QT_MOC_LITERAL(5, 52, 16), // "transferFinished"
+QT_MOC_LITERAL(6, 69, 7) // "success"
 
     },
     "ServerHelper\0progressChanged\0\0percent\0"
-    "transferFinished\0success"
+    "bytesReceived\0transferFinished\0success"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,12 +60,12 @@ static const uint qt_meta_data_ServerHelper[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
-       4,    1,   27,    2, 0x06 /* Public */,
+       1,    2,   24,    2, 0x06 /* Public */,
+       5,    1,   29,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Bool,    5,
+    QMetaType::Void, QMetaType::Int, QMetaType::LongLong,    3,    4,
+    QMetaType::Void, QMetaType::Bool,    6,
 
        0        // eod
 };
@@ -75,14 +76,14 @@ void ServerHelper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<ServerHelper *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->progressChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->progressChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
         case 1: _t->transferFinished((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (ServerHelper::*)(int );
+            using _t = void (ServerHelper::*)(int , qint64 );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ServerHelper::progressChanged)) {
                 *result = 0;
                 return;
@@ -139,9 +140,9 @@ int ServerHelper::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ServerHelper::progressChanged(int _t1)
+void ServerHelper::progressChanged(int _t1, qint64 _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

@@ -1,94 +1,87 @@
 #include "ClientHelper.h"
-#include <cstring>
-#include <QObject>
-#include <QThread>
-#include <QFileInfo>
+#include <QDataStream>
+#include <QTemporaryFile>
+#include <QTcpSocket>
 #include <QDir>
-#include <QDebug>
-extern "C"{
-#include <winsock2.h> 
-#include <cstdio>
-}
-#pragma comment(lib, "lws2_32.lib")
-#define wsConnect ::connect
 
 ClientHelper::ClientHelper() {};
 
 int ClientHelper::RecvFile(QString IP, QString port, QString fileName) {
-    std::string RecvIP = IP.toStdString();
-    std::string RecvPort = port.toStdString();                                                                              
-    // 将相对路径转换为绝对路径
-    QFileInfo fileInfo(fileName);
-    QString absolutePath = fileInfo.absoluteFilePath();
+    // 准备接收目录
+    QDir recvDir("received_files");
+    if (!recvDir.exists()) {
+        if (!recvDir.mkpath(".")) {
+            return ErrorHandling("无法创建接收目录");
+        }
+    }
     
-    // 检查目录是否存在，不存在则创建
-    QDir().mkpath(QFileInfo(absolutePath).absolutePath());
-
-    WSADATA wsaData;
-    SOCKET hSocket;
-    long long totalReceived = 0;
-
-    char buf[BUF_SIZE];
-    int readCnt;
-    SOCKADDR_IN servAdr;
-
-    if(WSAStartup(MAKEWORD(2,2), &wsaData) != 0) {
-        emit transferFinished(false);
-        return ErrorHandling("WSAStartup() error");
+    QString savePath = recvDir.absoluteFilePath(QFileInfo(fileName).fileName());
+    QTemporaryFile tempFile(savePath + ".XXXXXX");
+    
+    if (!tempFile.open()) {
+        return ErrorHandling("无法创建临时文件");
     }
 
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "File open error:" << file.errorString();
-        emit transferFinished(false);
-        return ErrorHandling("File open error");
+    // 建立连接
+    QTcpSocket socket;
+    socket.connectToHost(IP, port.toUShort());
+    
+    if (!socket.waitForConnected(5000)) {
+        return ErrorHandling(QString("连接超时: %1").arg(socket.errorString()).toUtf8().constData());
     }
 
-    hSocket = socket(PF_INET, SOCK_STREAM, 0);
-    if(hSocket == INVALID_SOCKET) {
-        file.close();
-        emit transferFinished(false);
-        return ErrorHandling("Socket creation error");
-    }
-
-    memset(&servAdr, 0, sizeof(servAdr));
-    servAdr.sin_family = AF_INET;
-    servAdr.sin_addr.s_addr = inet_addr(RecvIP.c_str());
-    servAdr.sin_port = htons(atoi(RecvPort.c_str()));
-
-    if(wsConnect(hSocket, (SOCKADDR*)&servAdr, sizeof(servAdr)) == SOCKET_ERROR) {
-        file.close();
-        closesocket(hSocket);
-        emit transferFinished(false);
-        return ErrorHandling("Connect error");
-    }
-
-    // 接收文件大小
+    // 接收文件头（文件大小）
+    QDataStream in(&socket);
+    in.setVersion(QDataStream::Qt_5_15);
+    
     qint64 fileSize = 0;
-    if (recv(hSocket, reinterpret_cast<char*>(&fileSize), sizeof(fileSize), 0) <= 0) {
-        file.close();
-        emit transferFinished(false);
-        return ErrorHandling("Failed to receive file size");
+    if (socket.bytesAvailable() < sizeof(qint64)) {
+        if (!socket.waitForReadyRead(10000)) {
+            return ErrorHandling("等待文件头超时");
+        }
     }
+    
+    in >> fileSize;
+    qDebug() << "待接收文件大小:" << fileSize << "字节";
 
-    while((readCnt = recv(hSocket, buf, BUF_SIZE, 0)) > 0) {
-        qint64 written = file.write(buf, readCnt);
-        if(written != readCnt) {
-            file.close();
-            emit transferFinished(false);
-            return ErrorHandling("File write error");
+    // 接收文件内容
+    qint64 bytesReceived = 0;
+    QByteArray buffer;
+    
+    while (bytesReceived < fileSize) {
+        if (!socket.waitForReadyRead(30000)) { // 30秒超时
+            tempFile.remove();
+            return ErrorHandling("接收数据超时");
         }
         
-        // 计算并发送进度
-        if(fileSize > 0) {
-            int percent = static_cast<int>((totalReceived * 100) / fileSize);
-            emit progressChanged(percent);
+        buffer = socket.read(qMin(fileSize - bytesReceived, (qint64)65536)); // 64KB缓冲区
+        if (buffer.isEmpty()) {
+            tempFile.remove();
+            return ErrorHandling("接收空数据包");
         }
+        
+        qint64 bytesWritten = tempFile.write(buffer);
+        if (bytesWritten != buffer.size()) {
+            tempFile.remove();
+            return ErrorHandling("写入文件失败");
+        }
+        
+        bytesReceived += bytesWritten;
+        emit progressChanged(static_cast<int>((bytesReceived * 100) / fileSize), bytesReceived);
     }
 
-    file.close();
-    closesocket(hSocket);
-    WSACleanup();
+    tempFile.close();
+    
+    // 重命名为最终文件
+    if (QFile::exists(savePath)) {
+        QFile::remove(savePath);
+    }
+    
+    if (!tempFile.copy(savePath)) {
+        return ErrorHandling("文件重命名失败");
+    }
+    
+    qDebug() << "文件接收完成，保存路径:" << QDir::toNativeSeparators(savePath);
     emit transferFinished(true);
     return 0;
 }

@@ -249,6 +249,7 @@ Makefile: ../FileTransfer.pro ../../../Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 		../FileTransfer.pro \
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
+		../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl \
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\FileTransfer.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=console"
@@ -431,6 +432,7 @@ Makefile: ../FileTransfer.pro ../../../Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 ../FileTransfer.pro:
 ../../../Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 ../../../Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
+../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 ../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 ../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 qmake: FORCE

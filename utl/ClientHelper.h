@@ -15,6 +15,6 @@ public:
     int RecvFile(QString IP, QString port, QString fileName);
     
 signals:
-    void progressChanged(int percent);
+    void progressChanged(int percent,qint64 bytesReceived);
     void transferFinished(bool success);
 };

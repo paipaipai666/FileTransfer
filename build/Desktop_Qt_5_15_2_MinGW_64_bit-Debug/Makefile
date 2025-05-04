@@ -250,6 +250,7 @@ Makefile: ../../FileTransfer.pro ../../../../Qt/5.15.2/mingw81_64/mkspecs/win32-
 		../../FileTransfer.pro \
 		../../../../Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		../../../../Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
+		../../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl \
 		../../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		../../../../Qt/5.15.2/mingw81_64/lib/qtmain.prl \
 		../../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
@@ -434,6 +435,7 @@ Makefile: ../../FileTransfer.pro ../../../../Qt/5.15.2/mingw81_64/mkspecs/win32-
 ../../FileTransfer.pro:
 ../../../../Qt/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 ../../../../Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl:
+../../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 ../../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 ../../../../Qt/5.15.2/mingw81_64/lib/qtmain.prl:
 ../../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
