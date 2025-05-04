@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -19,6 +20,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,25 +29,35 @@ class Ui_FileTransfer
 {
 public:
     QWidget *centralwidget;
+    QHBoxLayout *horizontalLayout_6;
     QTabWidget *tabWidget;
     QWidget *ServerPage;
+    QHBoxLayout *horizontalLayout_7;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
     QLabel *label_2;
+    QHBoxLayout *horizontalLayout;
     QLabel *label_3;
     QSpinBox *portBox;
     QPushButton *pushButton;
-    QToolButton *toolButton;
     QLabel *label_9;
+    QHBoxLayout *horizontalLayout_2;
     QLineEdit *fileNameEdit;
+    QToolButton *toolButton;
     QWidget *ClientPage;
+    QHBoxLayout *horizontalLayout_5;
+    QVBoxLayout *verticalLayout_2;
     QLabel *label_5;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *label_6;
     QLineEdit *lineEdit;
+    QHBoxLayout *horizontalLayout_4;
     QLabel *label_7;
     QSpinBox *spinBox_2;
     QLabel *label_8;
     QPushButton *pushButton_2;
     QLabel *label_4;
+    QLineEdit *RecvFileName;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *FileTransfer)
@@ -53,65 +65,151 @@ public:
         if (FileTransfer->objectName().isEmpty())
             FileTransfer->setObjectName(QString::fromUtf8("FileTransfer"));
         FileTransfer->resize(800, 600);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(FileTransfer->sizePolicy().hasHeightForWidth());
+        FileTransfer->setSizePolicy(sizePolicy);
         centralwidget = new QWidget(FileTransfer);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        horizontalLayout_6 = new QHBoxLayout(centralwidget);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 0, 751, 431));
         ServerPage = new QWidget();
         ServerPage->setObjectName(QString::fromUtf8("ServerPage"));
+        horizontalLayout_7 = new QHBoxLayout(ServerPage);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label = new QLabel(ServerPage);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(20, 20, 91, 21));
+
+        verticalLayout->addWidget(label);
+
         label_2 = new QLabel(ServerPage);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(20, 52, 41, 20));
+
+        verticalLayout->addWidget(label_2);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_3 = new QLabel(ServerPage);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(20, 90, 41, 20));
+
+        horizontalLayout->addWidget(label_3);
+
         portBox = new QSpinBox(ServerPage);
         portBox->setObjectName(QString::fromUtf8("portBox"));
-        portBox->setGeometry(QRect(70, 90, 71, 22));
+        portBox->setMinimum(1);
+        portBox->setMaximum(65535);
+
+        horizontalLayout->addWidget(portBox);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         pushButton = new QPushButton(ServerPage);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(20, 120, 281, 31));
-        toolButton = new QToolButton(ServerPage);
-        toolButton->setObjectName(QString::fromUtf8("toolButton"));
-        toolButton->setGeometry(QRect(230, 220, 51, 21));
+        pushButton->setMaximumSize(QSize(16777215, 300));
+
+        verticalLayout->addWidget(pushButton);
+
         label_9 = new QLabel(ServerPage);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(30, 180, 61, 21));
+
+        verticalLayout->addWidget(label_9);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         fileNameEdit = new QLineEdit(ServerPage);
         fileNameEdit->setObjectName(QString::fromUtf8("fileNameEdit"));
-        fileNameEdit->setGeometry(QRect(30, 220, 191, 20));
+
+        horizontalLayout_2->addWidget(fileNameEdit);
+
+        toolButton = new QToolButton(ServerPage);
+        toolButton->setObjectName(QString::fromUtf8("toolButton"));
+
+        horizontalLayout_2->addWidget(toolButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+
+        horizontalLayout_7->addLayout(verticalLayout);
+
         tabWidget->addTab(ServerPage, QString());
         ClientPage = new QWidget();
         ClientPage->setObjectName(QString::fromUtf8("ClientPage"));
+        horizontalLayout_5 = new QHBoxLayout(ClientPage);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label_5 = new QLabel(ClientPage);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(20, 20, 91, 21));
+
+        verticalLayout_2->addWidget(label_5);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         label_6 = new QLabel(ClientPage);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(20, 50, 51, 16));
+
+        horizontalLayout_3->addWidget(label_6);
+
         lineEdit = new QLineEdit(ClientPage);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(70, 50, 113, 20));
+
+        horizontalLayout_3->addWidget(lineEdit);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         label_7 = new QLabel(ClientPage);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(20, 82, 41, 20));
+
+        horizontalLayout_4->addWidget(label_7);
+
         spinBox_2 = new QSpinBox(ClientPage);
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        spinBox_2->setGeometry(QRect(70, 80, 81, 22));
+        spinBox_2->setMinimum(1);
+        spinBox_2->setMaximum(65535);
+
+        horizontalLayout_4->addWidget(spinBox_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_4);
+
         label_8 = new QLabel(ClientPage);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(20, 110, 41, 16));
+
+        verticalLayout_2->addWidget(label_8);
+
         pushButton_2 = new QPushButton(ClientPage);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(20, 130, 241, 31));
+        pushButton_2->setMaximumSize(QSize(16777215, 300));
+
+        verticalLayout_2->addWidget(pushButton_2);
+
         label_4 = new QLabel(ClientPage);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(20, 190, 61, 21));
+
+        verticalLayout_2->addWidget(label_4);
+
+        RecvFileName = new QLineEdit(ClientPage);
+        RecvFileName->setObjectName(QString::fromUtf8("RecvFileName"));
+
+        verticalLayout_2->addWidget(RecvFileName);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_2);
+
         tabWidget->addTab(ClientPage, QString());
+
+        horizontalLayout_6->addWidget(tabWidget);
+
         FileTransfer->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(FileTransfer);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -132,8 +230,8 @@ public:
         label_2->setText(QCoreApplication::translate("FileTransfer", "\347\212\266\346\200\201\357\274\232", nullptr));
         label_3->setText(QCoreApplication::translate("FileTransfer", "\347\233\221\345\220\254\347\253\257\345\217\243\357\274\232", nullptr));
         pushButton->setText(QCoreApplication::translate("FileTransfer", "\345\274\200\345\247\213\347\233\221\345\220\254", nullptr));
-        toolButton->setText(QCoreApplication::translate("FileTransfer", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));
         label_9->setText(QCoreApplication::translate("FileTransfer", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));
+        toolButton->setText(QCoreApplication::translate("FileTransfer", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(ServerPage), QCoreApplication::translate("FileTransfer", "\346\234\215\345\212\241\345\231\250\347\253\257", nullptr));
         label_5->setText(QCoreApplication::translate("FileTransfer", "\345\256\242\346\210\267\347\253\257\346\216\247\345\210\266\351\235\242\346\235\277", nullptr));
         label_6->setText(QCoreApplication::translate("FileTransfer", "\346\234\215\345\212\241\345\231\250IP\357\274\232", nullptr));

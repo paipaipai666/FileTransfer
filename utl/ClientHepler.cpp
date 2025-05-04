@@ -12,7 +12,7 @@ ClientHelper::ClientHelper() {};
 int ClientHelper::RecvFile(QString IP,QString port,QString fileName){
     std::string RecvIP=IP.toStdString();
     std::string RecvPort=port.toStdString();                                                                              
-    std::string RecvFileName=fileName.toStdString();
+    std::string RecvFileName=".../"+fileName.toStdString();
 
     WSADATA wsaData;
     SOCKET hSocket;
@@ -26,7 +26,7 @@ int ClientHelper::RecvFile(QString IP,QString port,QString fileName){
     if(WSAStartup(MAKEWORD(2,2),&wsaData)!=0)
         return ErrorHandling("WSAStartup() error");
 
-    fp=fopen(RecvFileName.c_str(),"wb");
+    fp=fopen(RecvFileName.c_str(),"w+");
     fileSize=(int)getFileSize(fp);
     hSocket=socket(PF_INET,SOCK_STREAM,0);
 

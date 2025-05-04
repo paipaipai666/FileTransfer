@@ -229,6 +229,11 @@ debug/moc_FileTransfer.cpp: ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qgridlayout.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QLabel \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlabel.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
@@ -255,6 +260,7 @@ debug/moc_FileTransfer.cpp: ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QTabWidget \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QToolButton \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qtoolbutton.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget \
 		debug/moc_predefs.h \
 		../../../Qt/5.15.2/mingw81_64/bin/moc.exe
@@ -395,6 +401,11 @@ debug/FileTransfer.o: ../src/FileTransfer.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qgridlayout.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QLabel \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlabel.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
@@ -421,10 +432,12 @@ debug/FileTransfer.o: ../src/FileTransfer.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QTabWidget \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QToolButton \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qtoolbutton.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget \
 		../utl/ServerHelper.h \
 		../utl/TransHelper.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtCore/QString \
+		../utl/ClientHelper.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtCore/QDir \
 		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \
@@ -545,6 +558,11 @@ debug/main.o: ../src/main.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qtouchdevice.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayout.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qgridlayout.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QLabel \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qlabel.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qframe.h \
@@ -571,6 +589,7 @@ debug/main.o: ../src/main.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QTabWidget \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QToolButton \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qtoolbutton.h \
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\src\main.cpp
 

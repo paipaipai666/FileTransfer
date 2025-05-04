@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra
 INCPATH       = -I..\..\..\FileTransfer -I. -I..\..\..\..\Qt\5.15.2\mingw81_64\include -I..\..\..\..\Qt\5.15.2\mingw81_64\include\QtWidgets -I..\..\..\..\Qt\5.15.2\mingw81_64\include\QtGui -I..\..\..\..\Qt\5.15.2\mingw81_64\include\QtANGLE -I..\..\..\..\Qt\5.15.2\mingw81_64\include\QtCore -Idebug -I. -I/include -I..\..\..\..\Qt\5.15.2\mingw81_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        D:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a  -lmingw32 D:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        -lws2_32 D:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a D:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a  -lmingw32 D:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = D:\Qt\5.15.2\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -424,6 +424,7 @@ debug/FileTransfer.o: ../../src/FileTransfer.cpp ../../src/FileTransfer.h \
 		../../utl/ServerHelper.h \
 		../../utl/TransHelper.h \
 		../../../../../../Qt/5.15.2/mingw81_64/include/QtCore/QString \
+		../../utl/ClientHelper.h \
 		../../../../../../Qt/5.15.2/mingw81_64/include/QtCore/QDir \
 		../../../../../../Qt/5.15.2/mingw81_64/include/QtCore/qdir.h \
 		../../../../../../Qt/5.15.2/mingw81_64/include/QtCore/qfileinfo.h \

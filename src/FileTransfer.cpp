@@ -1,6 +1,6 @@
 #include "FileTransfer.h"
 #include "utl/ServerHelper.h"
-#include "utl/ServerHelper.h"
+#include "utl/ClientHelper.h"
 #include "QDir"
 #include "QFileDialog"
 
@@ -29,5 +29,18 @@ void FileTransfer::on_pushButton_clicked()
     ServerHelper* sh = new ServerHelper();
 
     sh->SendFile(port,fileName);
+    delete sh;
+}
+
+
+void FileTransfer::on_pushButton_2_clicked()
+{
+    QString fileName = ui->RecvFileName->text();
+    QString IP = ui->lineEdit->text();
+    QString port = QString::number(ui->spinBox_2->value());
+    ClientHelper* ch = new ClientHelper();
+
+    ch->RecvFile(IP,port,fileName);
+    delete ch;
 }
 
