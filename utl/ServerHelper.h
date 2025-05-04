@@ -1,13 +1,20 @@
 #pragma once
 #include "TransHelper.h"
 #include <QString>
+#include <QObject>  // 添加这行
+
 extern "C"{
     #include <winsock2.h> 
 }
 
-class ServerHelper : public TransHelper{
+class ServerHelper : public TransHelper{  // 修改继承
+    Q_OBJECT  // 添加这行
+    
 public:
     ServerHelper();
-    //~ServerHelper();
-    int SendFile(QString port,QString fileName);
+    int SendFile(QString port, QString fileName);
+    
+signals:
+    void progressChanged(int percent);
+    void transferFinished(bool success);
 };

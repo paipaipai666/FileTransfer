@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="ServerPage">
        <attribute name="title">
@@ -101,6 +101,13 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="serverProgressBar">
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -184,6 +191,13 @@
           </item>
           <item>
            <widget class="QLineEdit" name="RecvFileName"/>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="clientProgressBar">
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

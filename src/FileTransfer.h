@@ -16,6 +16,8 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void showStatusMessage(const QString& message, bool isError = false);
+    void onServerProgressChanged(int percent);
+    void onClientProgressChanged(int percent);
 
 private:
     void setupButtonAnimations();

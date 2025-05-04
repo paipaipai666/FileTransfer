@@ -1,28 +1,22 @@
 #pragma once
-#pragma comment(lib, "lws2_32.lib")
 #include <QString>
-extern "C"{
-    #include <winsock2.h> 
-}
+#include <QObject>
+#include <QDebug>
+#include <QFile>
 
-class TransHelper{
+class TransHelper : public QObject{
 public:
-    int BUF_SIZE = 30;
+    int BUF_SIZE = 4096;
 public:
-    inline size_t getFileSize(FILE * fp);
-    inline int ErrorHandling(const char* message);
+    inline qint64 getFileSize(const QString &fileName)
+    {
+        QFile file(fileName);
+        return file.size();
+    }
+
+    inline int ErrorHandling(const char *message)
+    {
+        qCritical() << message;
+        return 1;
+    }
 };
-
-size_t TransHelper::getFileSize(FILE * fp){
-    long cur_offset=ftell(fp);
-    fseek(fp,0,SEEK_END);
-    size_t size = ftell(fp);
-    fseek(fp,cur_offset,SEEK_SET);
-    return size;
-}
-
-int TransHelper::ErrorHandling(const char* message){
-    fputs(message,stderr);
-    fputc('\n',stderr);
-    return 1;
-}

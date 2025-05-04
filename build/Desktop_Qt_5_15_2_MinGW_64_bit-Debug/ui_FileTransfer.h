@@ -15,6 +15,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
@@ -44,6 +45,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *fileNameEdit;
     QToolButton *toolButton;
+    QProgressBar *serverProgressBar;
     QWidget *ClientPage;
     QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_2;
@@ -58,6 +60,7 @@ public:
     QPushButton *pushButton_2;
     QLabel *label_4;
     QLineEdit *RecvFileName;
+    QProgressBar *clientProgressBar;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *FileTransfer)
@@ -135,6 +138,12 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        serverProgressBar = new QProgressBar(ServerPage);
+        serverProgressBar->setObjectName(QString::fromUtf8("serverProgressBar"));
+        serverProgressBar->setValue(0);
+
+        verticalLayout->addWidget(serverProgressBar);
+
 
         horizontalLayout_7->addLayout(verticalLayout);
 
@@ -203,6 +212,12 @@ public:
 
         verticalLayout_2->addWidget(RecvFileName);
 
+        clientProgressBar = new QProgressBar(ClientPage);
+        clientProgressBar->setObjectName(QString::fromUtf8("clientProgressBar"));
+        clientProgressBar->setValue(0);
+
+        verticalLayout_2->addWidget(clientProgressBar);
+
 
         horizontalLayout_5->addLayout(verticalLayout_2);
 
@@ -217,7 +232,7 @@ public:
 
         retranslateUi(FileTransfer);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(FileTransfer);

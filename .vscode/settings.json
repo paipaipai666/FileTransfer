@@ -52,6 +52,10 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "qfuture": "cpp"
+        "qfuture": "cpp",
+        "random": "cpp",
+        "future": "cpp",
+        "qdir": "cpp",
+        "qobject": "cpp"
     }
 }
