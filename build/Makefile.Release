@@ -606,7 +606,8 @@ release/main.o: ../src/main.cpp ../src/FileTransfer.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QToolButton \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/qtoolbutton.h \
 		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout \
-		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget
+		../../../../Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget \
+		../../../../Qt/5.15.2/mingw81_64/include/QtCore/QFile
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\src\main.cpp
 
 release/ClientHepler.o: ../utl/ClientHepler.cpp ../utl/ClientHelper.h \
