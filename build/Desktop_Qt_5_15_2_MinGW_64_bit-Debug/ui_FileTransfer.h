@@ -37,10 +37,10 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QLabel *label_2;
     QHBoxLayout *horizontalLayout;
     QLabel *label_3;
     QSpinBox *portBox;
+    QLabel *label_2;
     QPushButton *pushButton;
     QLabel *label_9;
     QHBoxLayout *horizontalLayout_2;
@@ -94,11 +94,6 @@ public:
 
         verticalLayout->addWidget(label);
 
-        label_2 = new QLabel(ServerPage);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        verticalLayout->addWidget(label_2);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_3 = new QLabel(ServerPage);
@@ -115,6 +110,11 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout);
+
+        label_2 = new QLabel(ServerPage);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        verticalLayout->addWidget(label_2);
 
         pushButton = new QPushButton(ServerPage);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
@@ -236,7 +236,7 @@ public:
 
         retranslateUi(FileTransfer);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FileTransfer);
@@ -246,8 +246,8 @@ public:
     {
         FileTransfer->setWindowTitle(QCoreApplication::translate("FileTransfer", "FileTransfer", nullptr));
         label->setText(QCoreApplication::translate("FileTransfer", "\346\234\215\345\212\241\345\231\250\347\253\257\346\216\247\345\210\266\351\235\242\346\235\277", nullptr));
-        label_2->setText(QCoreApplication::translate("FileTransfer", "\347\212\266\346\200\201\357\274\232", nullptr));
         label_3->setText(QCoreApplication::translate("FileTransfer", "\347\233\221\345\220\254\347\253\257\345\217\243\357\274\232", nullptr));
+        label_2->setText(QCoreApplication::translate("FileTransfer", "\347\212\266\346\200\201\357\274\232", nullptr));
         pushButton->setText(QCoreApplication::translate("FileTransfer", "\345\274\200\345\247\213\347\233\221\345\220\254", nullptr));
         label_9->setText(QCoreApplication::translate("FileTransfer", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));
         toolButton->setText(QCoreApplication::translate("FileTransfer", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));

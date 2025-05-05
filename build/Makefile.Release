@@ -121,7 +121,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_rsc.cpp
 release/qrc_rsc.cpp: ../rsc.qrc \
 		../../../Qt/5.15.2/mingw81_64/bin/rcc.exe \
-		../logo.ico
+		../logo.ico \
+		../style/main.qss
 	D:\Qt\5.15.2\mingw81_64\bin\rcc.exe -name rsc ..\rsc.qrc -o release\qrc_rsc.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
