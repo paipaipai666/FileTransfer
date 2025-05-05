@@ -50,6 +50,3 @@ https://github.com/your-project.git
 3. 提交代码：`git commit -m "Add new feature"`。
 4. 推送到分支：`git push origin feature-branch`。
 5. 发起Pull Request。
-
-## 许可证信息
-本项目采用MIT许可证，详情请参考 [LICENSE 文件](./LICENSE)。
