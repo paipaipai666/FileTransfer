@@ -1,5 +1,7 @@
 # 基于Qt和Socket编程的文件传输程序
 
+![Static Badge](https://img.shields.io/badge/Qt-green)![Language](https://img.shields.io/badge/Language-C++-blue.svg)![Socket](https://img.shields.io/badge/Sokcet-8A2BE2)
+
 ## 项目简介
 本项目是一个基于Qt和Socket编程的文件传输程序，通过使用Qt的网络编程库和Socket技术，实现了文件在客户端和服务器之间的高效、稳定传输。该程序适用于需要进行文件共享和传输的场景，如局域网内的文件分发、远程文件的获取等。
 
