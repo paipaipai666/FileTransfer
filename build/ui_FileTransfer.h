@@ -10,6 +10,7 @@
 #define UI_FILETRANSFER_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -73,6 +74,9 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(FileTransfer->sizePolicy().hasHeightForWidth());
         FileTransfer->setSizePolicy(sizePolicy);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/logo.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        FileTransfer->setWindowIcon(icon);
         centralwidget = new QWidget(FileTransfer);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout_6 = new QHBoxLayout(centralwidget);

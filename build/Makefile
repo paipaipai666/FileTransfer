@@ -33,7 +33,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = rsc_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 SUBTARGETS    =  \
@@ -251,7 +251,8 @@ Makefile: ../FileTransfer.pro ../../../Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl \
 		../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl \
-		../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf
+		../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
+		../rsc.qrc
 	$(QMAKE) -o Makefile ..\FileTransfer.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=console"
 ../../../Qt/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
 ../../../Qt/5.15.2/mingw81_64/mkspecs/qdevice.pri:
@@ -435,6 +436,7 @@ Makefile: ../FileTransfer.pro ../../../Qt/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 ../../../Qt/5.15.2/mingw81_64/lib/Qt5Network.prl:
 ../../../Qt/5.15.2/mingw81_64/lib/Qt5Core.prl:
 ../../../Qt/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
+../rsc.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\FileTransfer.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=console"
 

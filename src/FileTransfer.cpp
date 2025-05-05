@@ -3,7 +3,6 @@
 #include "utl/ClientHelper.h"
 #include "QDir"
 #include "QFileDialog"
-#include <thread>
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>
 
@@ -12,6 +11,9 @@ FileTransfer::FileTransfer(QWidget* parent)
     , ui(new Ui_FileTransfer)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon("://logo.ico"));
+
 
     QString progressStyle = R"(
         QProgressBar {

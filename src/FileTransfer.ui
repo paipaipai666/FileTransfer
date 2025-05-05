@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>FileTransfer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../rsc.qrc">
+    <normaloff>:/logo.ico</normaloff>:/logo.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
@@ -209,6 +213,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../rsc.qrc"/>
+ </resources>
  <connections/>
 </ui>
